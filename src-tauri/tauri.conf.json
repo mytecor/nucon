@@ -1,0 +1,66 @@
+{
+  "build": {
+    "beforeDevCommand": "pnpm dev:client",
+    "beforeBuildCommand": "pnpm build:client",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "NuCon",
+    "version": "../package.json"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "category": "Utility",
+      "identifier": "su.myt.nucon",
+      "shortDescription": "Unofficial console for NuPhy keyboards",
+      "longDescription": "",
+      "copyright": "Copyright (c) 2023 Vladislav Afonin",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "center": true,
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "title": "nucon",
+        "hiddenTitle": true
+      }
+    ]
+  }
+}

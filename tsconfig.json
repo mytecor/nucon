@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strictNullChecks": true,
+    "types": [
+      "vite/client",
+      "react",
+      "react-dom",
+      "react-dom/client",
+      "@tauri-apps/api/tauri",
+      "@tauri-apps/api/window",
+      "@tauri-apps/api/event",
+      "camelcase-keys",
+      "decamelize-keys"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "goToDefinition": true,
+          "classnameTransform": "camelCaseOnly",
+          "customTemplate": "./cssModulesTemplate.cjs"
+        }
+      }
+    ]
+  },
+  "include": ["src", "src/resolve.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
