@@ -1,4 +1,4 @@
-use hidapi::{DeviceInfo, HidApi, HidDevice};
+use hidapi::{DeviceInfo, HidApi};
 use std::sync::Mutex;
 
 use crate::{air60::Air60, polymorphic_enum};
@@ -8,6 +8,7 @@ pub trait Keyboard {
     const PRODUCT_ID: u16;
 
     fn check_secret(&self) -> bool;
+    fn get_colors_config(&self);
 }
 
 polymorphic_enum!(
@@ -16,20 +17,26 @@ polymorphic_enum!(
 );
 
 fn get_keyboard(device: &DeviceInfo, api: &HidApi) -> Result<Keyboards, &'static str> {
-    let kb = match (device.vendor_id(), device.product_id()) {
-        (Air60::VENDOR_ID, Air60::PRODUCT_ID) => Ok(Keyboards::Air60(Air60 {
-            device: Mutex::new(None),
-        })),
-        _ => Err("Unknown device"),
-    }?;
+    let mut kb = match (device.vendor_id(), device.product_id()) {
+        (Air60::VENDOR_ID, Air60::PRODUCT_ID) => Keyboards::Air60(Air60 {
+            device: Box::new(None),
+        }),
+        _ => return Err("Unknown device"),
+    };
 
     let res = match device.open_device(api) {
-        Ok(res) => Ok(res),
-        Err(_) => Err("Unable to open device"),
-    }?;
+        Ok(res) => res,
+        _ => return Err("Unable to open device"),
+    };
 
-    use_keyboard!(&kb, |kb| {
-        *kb.device.lock().unwrap() = Some(res);
+    use_keyboard!(&mut kb, |kb| {
+        *kb.device = Some(res);
+
+        if !kb.check_secret() {
+            return Err("Invalid interface");
+        };
+
+        kb.get_colors_config();
     });
 
     Ok(kb)

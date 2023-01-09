@@ -30,4 +30,4 @@ createRoot(document.getElementById('root') as HTMLElement).render(
   </StrictMode>,
 )
 
-call(Methods.GetKeyboard, {}).then(console.log, console.log)
+call(Methods.GetKeyboard, {}).then(console.log, alert)

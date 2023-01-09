@@ -1,14 +1,8 @@
 # About
 
-vendorId: `0x05ac`
-productId: `0x024f`
-iManufacturer: 1
-iProduct: 2
-bcdDevice: `0x0111` // Firmware version
-deviceName: `Air60`
-
-usagePage: 1
-usage: 6
+device_name: `Air60`
+vendor_id: `0x05ac`
+product_id: `0x024f`
 
 # Nuphy Console Boot
 
@@ -25,9 +19,11 @@ Request password: `05 05 81 00 00 00`
 
 # Set rgb fixed color
 
-r_offset: 569
-g_offest: 570
-b_offset: 571
+```ts
+const r_offset: 569
+const g_offest: 570
+const b_offset: 571
+```
 
 HID starts from `06 08 b8 00 40 00`
 
@@ -109,27 +105,27 @@ const LED_mode_value: LED_mode_values
 
 enum LED_mode_values {
   OFF: 0x00
-  Fixed_on: 0x01
+  FixedOn: 0x01
   Respire: 0x02
   Rainbow: 0x03
-  Flash_away: 0x04
+  FlashAway: 0x04
   Raindrops: 0x05
-  Rainbow_wheel: 0x06
-  Ripples_shining: 0x07
-  Stars_twinkle: 0x08
-  Shadow_disappear: 0x09
-  Retro_snake: 0x0a
-  Neon_stream: 0x0b
+  RainbowWheel: 0x06
+  RipplesShining: 0x07
+  StarsTwinkle: 0x08
+  ShadowDisappear: 0x09
+  RetroSnake: 0x0a
+  NeonStream: 0x0b
   Reaction: 0x0c
-  Sine_wave: 0x0d
-  Retinue_scanning: 0x0e
-  Rotating windmill: 0x0f
-  Colorful waterfall: 0x10
+  SineWave: 0x0d
+  RetinueScanning: 0x0e
+  RotatingWindmill: 0x0f
+  ColorfulWaterfall: 0x10
   Blossoming: 0x11
-  Rotating storm: 0x12
+  RotatingStorm: 0x12
   Collision: 0x13
   Perfect: 0x14
-  Game mode: 0x15 // seems not working
+  GameMode: 0x15
 }
 ```
 
@@ -217,4 +213,5 @@ HID starts from `06 03 b6 00 00 00`
 ```
 
 ## Notes
+
 The `07 34 07 34 00 34 07` looks like LEDParam from Cfg.ini
